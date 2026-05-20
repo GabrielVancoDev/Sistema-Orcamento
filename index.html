@@ -1,11 +1,46 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Orçamentos</title>
-</head>
-<body>
-    
-</body>
+  </head>
+  <body>
+    <!-- Header -->
+    <section class="container">
+      <div class="header">
+        <h1>Sistema de Orçamentos</h1>
+        <p>Geradir de Orçamentos e Notas Fiscais de Compras</p>
+      </div>
+
+      <!-- Conteúdo de Geração da Nota -->
+      <div class="content">
+        <div class="section-title">Dados da Empresa</div>
+        <!-- Grid de Campos -->
+        <div class="form-grid">
+          <div class="form-group">
+            <!-- Nome da Empresa -->
+            <label
+              >Nome da Empresa <span class="required">*</span
+              ><span class="char-count">(Máx. 80)</span></label
+            >
+            <!-- Nome da Empresa -->
+            <input
+              type="text"
+              id="empresaNome"
+              maxlength="80"
+              value="TechStore Informática"
+              placeholder="Nome da Empresa"
+              required
+            />
+
+            <span class="error-message" id="errorEmpresaNome"
+              >Campo Obrigatório</span
+            >
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
