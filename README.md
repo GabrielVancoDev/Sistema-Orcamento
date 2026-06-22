@@ -146,5 +146,3 @@ Desenvolvido como um projeto de portfólio para demonstrar habilidades em:
 Para dúvidas ou sugestões, abra uma issue no repositório.
 
 ---
-
-**Desenvolvido com ❤️ para o seu portfólio**
