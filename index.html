@@ -1,46 +1,344 @@
 <!doctype html>
-<html lang="pt">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema de Orçamentos</title>
+    <meta
+      name="description"
+      content="Sistema de geração de orçamentos e notas fiscais para equipamentos de informática"
+    />
+    <meta
+      name="keywords"
+      content="orçamento, nota fiscal, TI, informática, PDF"
+    />
+    <meta name="author" content="Seu Nome" />
+    <title>Sistema de Orçamento - TI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   </head>
   <body>
-    <!-- Header -->
-    <section class="container">
+    <div class="container">
       <div class="header">
-        <h1>Sistema de Orçamentos</h1>
-        <p>Geradir de Orçamentos e Notas Fiscais de Compras</p>
+        <h1>💻 Sistema de Orçamento TI</h1>
+        <p>
+          Gerador de Orçamentos e Notas Fiscais para Equipamentos de Informática
+        </p>
       </div>
 
-      <!-- Conteúdo de Geração da Nota -->
       <div class="content">
-        <div class="section-title">Dados da Empresa</div>
-        <!-- Grid de Campos -->
-        <div class="form-grid">
-          <div class="form-group">
-            <!-- Nome da Empresa -->
-            <label
-              >Nome da Empresa <span class="required">*</span
-              ><span class="char-count">(Máx. 80)</span></label
-            >
-            <!-- Nome da Empresa -->
-            <input
-              type="text"
-              id="empresaNome"
-              maxlength="80"
-              value="TechStore Informática"
-              placeholder="Nome da Empresa"
-              required
-            />
-
-            <span class="error-message" id="errorEmpresaNome"
-              >Campo Obrigatório</span
-            >
+        <!-- Informações da Empresa -->
+        <div class="section">
+          <div class="section-title">🏢 Dados da Empresa</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label
+                >Nome da Empresa <span class="required">*</span>
+                <span class="char-count">(máx. 80)</span></label
+              >
+              <input
+                type="text"
+                id="empresaNome"
+                maxlength="80"
+                value="TechStore Informática"
+                placeholder="Nome da empresa"
+                required
+              />
+              <span class="error-message" id="errorEmpresaNome"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >CNPJ <span class="required">*</span>
+                <span class="char-count">(18 dígitos)</span></label
+              >
+              <input
+                type="text"
+                id="empresaCnpj"
+                maxlength="18"
+                value="12.345.678/0001-90"
+                placeholder="00.000.000/0000-00"
+                required
+              />
+              <span class="error-message" id="errorEmpresaCnpj"
+                >CNPJ inválido</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Endereço <span class="required">*</span>
+                <span class="char-count">(máx. 100)</span></label
+              >
+              <input
+                type="text"
+                id="empresaEndereco"
+                maxlength="100"
+                value="Rua das Tecnologias, 123"
+                placeholder="Endereço completo"
+                required
+              />
+              <span class="error-message" id="errorEmpresaEndereco"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Cidade/Estado <span class="required">*</span>
+                <span class="char-count">(máx. 50)</span></label
+              >
+              <input
+                type="text"
+                id="empresaCidade"
+                maxlength="50"
+                value="São Paulo - SP"
+                placeholder="Cidade - UF"
+                required
+              />
+              <span class="error-message" id="errorEmpresaCidade"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Telefone <span class="required">*</span>
+                <span class="char-count">(máx. 15)</span></label
+              >
+              <input
+                type="text"
+                id="empresaTelefone"
+                maxlength="15"
+                value="(11) 98765-4321"
+                placeholder="(00) 00000-0000"
+                required
+              />
+              <span class="error-message" id="errorEmpresaTelefone"
+                >Telefone inválido</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Email <span class="required">*</span>
+                <span class="char-count">(máx. 60)</span></label
+              >
+              <input
+                type="email"
+                id="empresaEmail"
+                maxlength="60"
+                value="contato@techstore.com.br"
+                placeholder="email@empresa.com"
+                required
+              />
+              <span class="error-message" id="errorEmpresaEmail"
+                >Email inválido</span
+              >
+            </div>
           </div>
-          
+        </div>
+
+        <!-- Informações do Cliente -->
+        <div class="section">
+          <div class="section-title">👤 Dados do Cliente</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label
+                >Nome/Razão Social <span class="required">*</span>
+                <span class="char-count">(máx. 80)</span></label
+              >
+              <input
+                type="text"
+                id="clienteNome"
+                maxlength="80"
+                placeholder="Nome do cliente"
+                required
+              />
+              <span class="error-message" id="errorClienteNome"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >CPF/CNPJ <span class="required">*</span>
+                <span class="char-count">(14 ou 18 dígitos)</span></label
+              >
+              <input
+                type="text"
+                id="clienteCpfCnpj"
+                maxlength="18"
+                placeholder="000.000.000-00"
+                required
+              />
+              <span class="error-message" id="errorClienteCpfCnpj"
+                >CPF/CNPJ inválido</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Endereço <span class="required">*</span>
+                <span class="char-count">(máx. 100)</span></label
+              >
+              <input
+                type="text"
+                id="clienteEndereco"
+                maxlength="100"
+                placeholder="Endereço completo"
+                required
+              />
+              <span class="error-message" id="errorClienteEndereco"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Cidade/Estado <span class="required">*</span>
+                <span class="char-count">(máx. 50)</span></label
+              >
+              <input
+                type="text"
+                id="clienteCidade"
+                maxlength="50"
+                placeholder="Cidade - UF"
+                required
+              />
+              <span class="error-message" id="errorClienteCidade"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                >Telefone <span class="required">*</span>
+                <span class="char-count">(máx. 15)</span></label
+              >
+              <input
+                type="text"
+                id="clienteTelefone"
+                maxlength="15"
+                placeholder="(00) 00000-0000"
+                required
+              />
+              <span class="error-message" id="errorClienteTelefone"
+                >Telefone inválido</span
+              >
+            </div>
+            <div class="form-group">
+              <label>Email <span class="char-count">(máx. 60)</span></label>
+              <input
+                type="email"
+                id="clienteEmail"
+                maxlength="60"
+                placeholder="email@cliente.com"
+              />
+              <span class="error-message" id="errorClienteEmail"
+                >Email inválido</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Informações do Documento -->
+        <div class="section">
+          <div class="section-title">📄 Informações do Documento</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label
+                >Número do Documento <span class="required">*</span>
+                <span class="char-count">(máx. 20)</span></label
+              >
+              <input
+                type="text"
+                id="numeroDoc"
+                maxlength="20"
+                value="001/2026"
+                placeholder="001/2026"
+                required
+              />
+              <span class="error-message" id="errorNumeroDoc"
+                >Campo obrigatório</span
+              >
+            </div>
+            <div class="form-group">
+              <label>Data <span class="required">*</span></label>
+              <input type="date" id="dataDoc" required />
+              <span class="error-message" id="errorDataDoc"
+                >Data obrigatória</span
+              >
+            </div>
+            <div class="form-group">
+              <label>Tipo de Documento <span class="required">*</span></label>
+              <select id="tipoDoc">
+                <option value="orcamento">Orçamento</option>
+                <option value="nota">Nota Fiscal</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Adicionar Itens -->
+        <div class="section">
+          <div class="section-title">🛒 Adicionar Itens</div>
+          <div class="item-input">
+            <div class="form-group">
+              <label
+                >Descrição do Produto <span class="required">*</span>
+                <span class="char-count">(máx. 100)</span></label
+              >
+              <input
+                type="text"
+                id="itemDescricao"
+                maxlength="100"
+                placeholder="Ex: Notebook Dell Inspiron 15"
+              />
+            </div>
+            <div class="form-group">
+              <label>Quantidade <span class="required">*</span></label>
+              <input
+                type="number"
+                id="itemQuantidade"
+                value="1"
+                min="1"
+                max="9999"
+              />
+            </div>
+            <div class="form-group">
+              <label>Valor Unitário (R$) <span class="required">*</span></label>
+              <input
+                type="number"
+                id="itemValor"
+                value="0"
+                min="0.01"
+                step="0.01"
+                max="999999.99"
+              />
+            </div>
+            <button class="btn-success" onclick="adicionarItem()">
+              ➕ Adicionar
+            </button>
+          </div>
+
+          <!-- Tabela de Itens -->
+          <div id="tabelaItens"></div>
+
+          <!-- Total -->
+          <div id="totalSection"></div>
+        </div>
+
+        <!-- Ações -->
+        <div class="actions">
+          <button class="btn-primary" onclick="gerarPDF()" id="btnGerarPDF">
+            📥 Gerar PDF
+          </button>
+          <button class="btn-secondary" onclick="limparFormulario()">
+            🔄 Limpar Tudo
+          </button>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/validation.js"></script>
+    <script src="assets/js/app.js"></script>
   </body>
 </html>
